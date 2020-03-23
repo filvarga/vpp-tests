@@ -34,7 +34,7 @@ RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
     inetutils-traceroute less iputils-ping \
-    net-tools iproute2 tcpdump netcat; \
+    net-tools iproute2 tcpdump netcat vim; \
     rm -rf /var/lib/apt/lists/*; \
     mv /usr/sbin/tcpdump /usr/bin/tcpdump
 

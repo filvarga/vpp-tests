@@ -9,8 +9,8 @@ startup="startup.conf"
 config="vpp.conf"
 
 # TODO: test as argument ?
-#test="http_simple.py"
-test="http_advanced.py"
+test="http_simple.py"
+#test="http_advanced.py"
 
 # rate-multipleier != cps (if custom.py not used)
 usage ()
