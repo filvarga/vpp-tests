@@ -16,9 +16,9 @@ WORKDIR /opt/trex-core
 
 ADD patches /patches
 
-RUN set -eux; \
-  find /patches -type f -name '*\.patch' | \
-  xargs -n1 git apply
+RUN if [ $(ls -1 *.patch 2>/dev/null | wc -l) != 0 ]; then \
+      find /patches -type f -name '*\.patch' | xargs -n1 git apply; \
+    fi
 
 WORKDIR /opt/trex-core/linux_dpdk
 
