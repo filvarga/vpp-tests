@@ -22,7 +22,7 @@ class Device(object):
             with open(filename, "a") as fo:
                 fo.write(self.slot)
         except:
-            stderr.write("error unbinding {}".format(self))
+            stderr.write("error unbinding {}\n".format(self))
 
     def bind(self, driver):
         filename = "/sys/bus/pci/drivers/{}/bind".format(driver)
@@ -30,13 +30,13 @@ class Device(object):
             with open(filename, "a") as fo:
                 fo.write(self.slot)
         except:
-            stderr.write("error binding {}".format(self))
+            stderr.write("error binding {}\n".format(self))
 
 
 class Devices(dict):
 
     def filter_by_slots(self, slots):
-        return map(self.get, slots)
+        return filter(None, map(self.get, slots))
 
 
 def get_all():
@@ -156,7 +156,7 @@ def get_args():
     p = sps.add_parser('rebind')
     p.set_defaults(clb=rebind_devices)
 
-    p.add_argument('driver', help='driver to rebind to')
+    p.add_argument('driver', help='driver to rebind to [lspci]')
     p.add_argument('slots', metavar='N', type=str, nargs='+',
                    help='pci slots')
 
