@@ -30,3 +30,20 @@ trx_iface1=`./scripts/config.py slot-to-name $pci_slot3`
 # be sure trex interfaces are up before starting trex
 sudo ip link set dev $trx_iface0 up &> /dev/null
 sudo ip link set dev $trx_iface1 up &> /dev/null
+
+### network cards
+
+## show pci slots & drivers
+sudo lshw -c network -businfo
+
+## vpp/trex lan0 & lan1
+sudo ./dpdk-config.py rebind <igb_uio/ixgbe> 0000:02:00.0 0000:02:00.1
+sudo ./dpdk-config.py rebind <igb_uio/ixgbe> 0000:84:00.0 0000:84:00.1
+# 02:00.0 - > 84:00.0 (lan0)
+# 84:00.1 - > 02:00.1 (lan1)
+
+# vpp/trex lan0 & lan1
+sudo ./dpdk-config.py rebind <igb_uio/ixgbe> 0000:03:00.0 0000:03:00.1
+sudo ./dpdk-config.py rebind <igb_uio/ixgbe> 0000:81:00.0 0000:81:00.1
+# 03:00.0 - > 81:00.0 (lan0)
+# 81:00.1 - > 03:00.1 (lan1)
