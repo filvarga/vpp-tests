@@ -93,12 +93,12 @@ dpdk {{
     print(config.format(dev0.slot, dev1.slot))
 
 
-def create_trex_config(args):
+def create_trex_config(args, devs):
     dev0, dev1 = devs.filter_by_slots((args.slot0, args.slot1))
     config = """
 - port_limit: 2
   version: 2
-  interfaces: ["{0}", "{1}"]
+  interfaces: ['{0}', '{1}']
   
   port_info:
     - ip         : 10.0.0.1
@@ -120,7 +120,7 @@ def create_trex_config(args):
       - socket: 1
         threads: [9,10,11,12,13,14,15]
     """
-    print(config.format(dev0.link, dev1.link))
+    print(config.format(dev0.slot, dev1.slot))
 
 def rebind_devices(args, devs):
     for dev in devs.filter_by_slots(args.slots):
@@ -142,7 +142,9 @@ def get_args():
     sps = parser.add_subparsers()
 
     # create vpp / trex configuration file
-    ps = [sps.add_parser('vpp'), sps.add_parser('trex')]
+    ps = [sps.add_parser('vpp-config'),
+          sps.add_parser('trex-config')]
+
     ps[0].set_defaults(clb=create_vpp_config)
     ps[1].set_defaults(clb=create_trex_config)
 
