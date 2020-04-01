@@ -36,7 +36,7 @@ docker cp ./conf/vpp/$config vpp-run:/etc/vpp.conf
 # TODO: make optional to reconfigure
 # some tests may require running multiple times on same vpp
 # without restarting it
-docker exec -it vpp-run /scripts/kill
+#docker exec -it vpp-run /scripts/kill
 
 # -d Duration of test in sec (default is 3600).
 # -m Rate multiplier. Multiply basic rate of templates by this number.
