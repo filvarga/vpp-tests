@@ -47,3 +47,13 @@ sudo ./dpdk-config.py rebind <igb_uio/ixgbe> 0000:03:00.0 0000:03:00.1
 sudo ./dpdk-config.py rebind <igb_uio/ixgbe> 0000:81:00.0 0000:81:00.1
 # 03:00.0 - > 81:00.0 (lan0)
 # 81:00.1 - > 03:00.1 (lan1)
+
+## install core dump script
+cp coredump.sh /usr/local/sbin/coredump.sh
+
+## create configuration
+/etc/sysctl.d/core-pattern.conf:
+kernel.core_pattern = |/usr/local/sbin/coredump.sh %e %t
+
+## update configuration
+sysctl -p /etc/sysctl.d/core-pattern.conf
