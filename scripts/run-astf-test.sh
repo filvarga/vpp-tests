@@ -2,15 +2,10 @@
 
 warm_up=0
 threads=1
-#threads=2
-#threads=4
 
 startup="startup.conf"
 config="vpp.conf"
-
-# TODO: test as argument ?
 test="http_simple.py"
-#test="http_advanced.py"
 
 # rate-multipleier != cps (if custom.py not used)
 usage ()
@@ -36,7 +31,7 @@ docker cp ./conf/vpp/$config vpp-run:/etc/vpp.conf
 # TODO: make optional to reconfigure
 # some tests may require running multiple times on same vpp
 # without restarting it
-#docker exec -it vpp-run /scripts/kill
+docker exec -it vpp-run /scripts/kill
 
 # -d Duration of test in sec (default is 3600).
 # -m Rate multiplier. Multiply basic rate of templates by this number.
