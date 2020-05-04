@@ -3,8 +3,6 @@
 warm_up=0
 threads=1
 
-startup="startup.conf"
-config="vpp.conf"
 test="http_simple.py"
 
 # rate-multipleier != cps (if custom.py not used)
@@ -20,18 +18,6 @@ fi
 
 d=$1
 m=$2
-
-# reconfigure trex
-docker cp ./conf/trex/trex_cfg.yaml trex-run:/etc/trex_cfg.yaml
-
-# reconfigure vpp && restart in container vpp (faster)
-docker cp ./conf/vpp/$startup vpp-run:/etc/startup.conf
-docker cp ./conf/vpp/$config vpp-run:/etc/vpp.conf
-
-# TODO: make optional to reconfigure
-# some tests may require running multiple times on same vpp
-# without restarting it
-docker exec -it vpp-run /scripts/kill
 
 # -d Duration of test in sec (default is 3600).
 # -m Rate multiplier. Multiply basic rate of templates by this number.
